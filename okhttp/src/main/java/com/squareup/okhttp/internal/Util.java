@@ -104,36 +104,6 @@ public final class Util {
   }
 
   /**
-   * Closes {@code source}, ignoring any checked exceptions. Does nothing if
-   * {@code source} is null.
-   */
-  public static void closeQuietly(Source source) {
-    if (source != null) {
-      try {
-        source.close();
-      } catch (RuntimeException rethrown) {
-        throw rethrown;
-      } catch (Exception ignored) {
-      }
-    }
-  }
-
-  /**
-   * Closes {@code sink}, ignoring any checked exceptions. Does nothing if
-   * {@code sink} is null.
-   */
-  public static void closeQuietly(Sink sink) {
-    if (sink != null) {
-      try {
-        sink.close();
-      } catch (RuntimeException rethrown) {
-        throw rethrown;
-      } catch (Exception ignored) {
-      }
-    }
-  }
-
-  /**
    * Closes {@code socket}, ignoring any checked exceptions. Does nothing if
    * {@code socket} is null.
    */
@@ -203,17 +173,6 @@ public final class Util {
         throw new IOException("failed to delete file: " + file);
       }
     }
-  }
-
-  /**
-   * Implements OutputStream.write(int) in terms of OutputStream.write(byte[], int, int).
-   * OutputStream assumes that you implement OutputStream.write(int) and provides default
-   * implementations of the others, but often the opposite is more efficient.
-   */
-  public static void writeSingleByte(OutputStream out, int b) throws IOException {
-    byte[] buffer = new byte[1];
-    buffer[0] = (byte) (b & 0xff);
-    out.write(buffer);
   }
 
   /**
